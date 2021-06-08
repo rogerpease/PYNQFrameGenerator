@@ -1,7 +1,9 @@
 #!/usr/bin/env python3 
 #
 # To Run: 
-#     ./RunSBNOverlay  
+#  RunFrameGenerator.py 
+# 
+# Should return PASS if we got the image we expected. 
 #
 
 from pynq import Overlay 
@@ -11,8 +13,20 @@ import json
 import time 
 import numpy
 import collections
+import os
 
-ol = Overlay("FrameGenerator.bit") 
+#
+# Change to path of script. 
+#
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
+
+#
+# Load Image 
+#
+
+ol = Overlay("PYNQFrameGenerator.bit") 
 fg=ol.FrameGeneratorTop_0
 dma=ol.axi_dma_0
 
@@ -20,7 +34,11 @@ height=1080
 width =1920
 pixels=3 
 
+# Write Number of pixelse we will need (for LAST generation). 
+# The next rev will have this auto-computed. :) 
+#
 fg.write(0x0C,height*width*pixels-1)
+# Write height/width to peripheral. 
 fg.write(0x04,(height<<16)+width)
 
 receiveFrame = allocate(shape=(height*width*pixels,),dtype='u1')
@@ -40,7 +58,6 @@ with open("pynqOutputFrame.raw","wb") as fp:
 
 with open("Golden_RedGreenBlueWhite1920x1080_RGB24.raw","rb") as fp:
     fileContent = fp.read()
-
 
 compareFrame = []
 for val in fileContent:

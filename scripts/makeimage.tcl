@@ -9,9 +9,9 @@
 # Log file: /home/rpease/PYNQProjects/FrameGenerator/vivado.log
 # Journal file: /home/rpease/PYNQProjects/FrameGenerator/vivado.jou
 #-----------------------------------------------------------
-create_project project_1 /home/rpease/PYNQProjects/FrameGenerator/project_1 -part xc7z020clg400-1
+create_project project_1 ./project_1 -part xc7z020clg400-1
 set_property board_part tul.com.tw:pynq-z2:part0:1.0 [current_project]
-set_property  ip_repo_paths  /home/rpease/PYNQProjects/FrameGenerator/Verilog/module [current_project]
+set_property  ip_repo_paths  ./Verilog/module [current_project]
 update_ip_catalog
 create_bd_design "design_1"
 update_compile_order -fileset sources_1
@@ -38,8 +38,8 @@ startgroup
 apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config { Clk {/processing_system7_0/FCLK_CLK0 (100 MHz)} Freq {100} Ref_Clk0 {} Ref_Clk1 {} Ref_Clk2 {}}  [get_bd_pins FrameGeneratorTop_0/frameOut_aclk]
 apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {Auto} Clk_slave {Auto} Clk_xbar {Auto} Master {/axi_dma_0/M_AXI_MM2S} Slave {/processing_system7_0/S_AXI_HP0} ddr_seg {Auto} intc_ip {New AXI Interconnect} master_apm {0}}  [get_bd_intf_pins processing_system7_0/S_AXI_HP0]
 endgroup
-make_wrapper -files [get_files /home/rpease/PYNQProjects/FrameGenerator/project_1/project_1.srcs/sources_1/bd/design_1/design_1.bd] -top
-add_files -norecurse /home/rpease/PYNQProjects/FrameGenerator/project_1/project_1.gen/sources_1/bd/design_1/hdl/design_1_wrapper.v
+make_wrapper -files [get_files ./project_1/project_1.srcs/sources_1/bd/design_1/design_1.bd] -top
+add_files -norecurse ./project_1/project_1.gen/sources_1/bd/design_1/hdl/design_1_wrapper.v
 apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {/processing_system7_0/FCLK_CLK0 (100 MHz)} Clk_slave {/processing_system7_0/FCLK_CLK0 (100 MHz)} Clk_xbar {/processing_system7_0/FCLK_CLK0 (100 MHz)} Master {/axi_dma_0/M_AXI_S2MM} Slave {/processing_system7_0/S_AXI_HP0} ddr_seg {Auto} intc_ip {/axi_mem_intercon} master_apm {0}}  [get_bd_intf_pins axi_dma_0/M_AXI_S2MM]
 save_bd_design
 launch_runs impl_1 -to_step write_bitstream -jobs 2
