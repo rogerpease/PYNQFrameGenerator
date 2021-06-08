@@ -62,7 +62,7 @@ module FrameGeneratorCore
        end 
      else  
        begin 
-         $display("MODULE: Toggle Clock DataOutReady ", dataOutReady, " Control Enable ",controlEnable); 
+//         $display("MODULE: Toggle Clock DataOutReady ", dataOutReady, " Control Enable ",controlEnable); 
          if (controlEnable == 0)
            dataOutValid      <= 0; 
          else 
@@ -71,10 +71,10 @@ module FrameGeneratorCore
            begin 
              if (FORMAT == 0) 
              begin 
-               $display("MODULE: DataOutLastIndex: ",dataOutLastIndex, " dataOutLastPeriod ",dataOutLastPeriod); 
+ //              $display("MODULE: DataOutLastIndex: ",dataOutLastIndex, " dataOutLastPeriod ",dataOutLastPeriod); 
                if (dataOutLastIndex == dataOutLastPeriod[24:0]) 
                begin 
-                 $display("MODULE: Dataoutlast"); 
+//                 $display("MODULE: Dataoutlast"); 
                  dataOutLast <= 1; 
                  dataOutLastIndex <= 0; 
                end 
@@ -84,7 +84,7 @@ module FrameGeneratorCore
                  dataOutLastIndex <= dataOutLastIndex + 1; 
                end 
                   
-               $display("ColCounter: ",colCounter, " RowCounter ",rowCounter," pixelPlane ", pixelPlane," DataOut ",dataOut); 
+  //             $display("ColCounter: ",colCounter, " RowCounter ",rowCounter," pixelPlane ", pixelPlane," DataOut ",dataOut); 
   
 /*     verilator lint_off WIDTH */ 
                pixelPlane = (pixelPlane + 1); 
@@ -120,10 +120,10 @@ module FrameGeneratorCore
            end
            else 
            begin 
-             $display(" FORMAT != 0 ", dataOutReady); 
+//             $display(" FORMAT != 0 ", dataOutReady); 
            end
        end 
-     $display("MODULE: Ending Always "); 
+//     $display("MODULE: Ending Always "); 
    end 
     
  /* verilator lint_off WIDTH */
